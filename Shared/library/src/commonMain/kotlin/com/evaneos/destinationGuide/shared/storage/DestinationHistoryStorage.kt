@@ -1,0 +1,17 @@
+@file:Suppress("EXPECT_ACTUAL_CLASSIFIERS_ARE_IN_BETA_WARNING")
+
+package com.evaneos.destinationGuide.shared.storage
+
+import kotlinx.coroutines.flow.StateFlow
+
+// only iOS is implemented, other target can also be added
+internal expect class DestinationHistoryStorage() {
+
+    // store the id of the destination
+    // could be the whole model instead of the id
+    val currentDestinationIds: StateFlow<List<String>>
+
+    fun addDestinationId(destinationId: String)
+
+    fun removeAll()
+}

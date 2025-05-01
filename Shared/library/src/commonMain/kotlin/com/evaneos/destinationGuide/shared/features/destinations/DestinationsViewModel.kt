@@ -21,6 +21,7 @@ import kotlin.coroutines.resumeWithException
 import kotlin.coroutines.suspendCoroutine
 
 public class DestinationsViewModel(
+    // better using Injection Framework like Koin
     public val destinationFetchingService: DestinationFetchingService = DestinationFetchingServiceImpl(),
     public val destinationHistoryService: DestinationHistoryService = DestinationHistoryServiceImpl()
 ) : ViewModel() {
@@ -35,11 +36,7 @@ public class DestinationsViewModel(
         destinationHistoryService.current.stateIn(
             viewModelScope, SharingStarted.WhileSubscribed(5000), emptyList()
         )
-
-    public fun addDestinationDetailToHistory(destinationDetails: DestinationDetails) {
-        destinationHistoryService.addToHistory(destinationDetails)
-    }
-
+        
     init {
         loadDestinations()
     }
@@ -62,7 +59,7 @@ public class DestinationsViewModel(
             }
         }
     }
-
+    
     @Throws(Exception::class)
     public suspend fun onSelectDestination(destinationId: String): DestinationDetails {
         return withContext(Dispatchers.Default) {
@@ -71,7 +68,7 @@ public class DestinationsViewModel(
                     when (it) {
                         is GetDestinationDetailsResult.Failure -> {
                             continuation.resumeWithException(
-                                Exception(message = it.error.name)
+                                Exception(it.error.name)
                             )
                         }
 
@@ -84,4 +81,9 @@ public class DestinationsViewModel(
             }
         }
     }
+    
+    public fun addDestinationDetailToHistory(destinationDetails: DestinationDetails) {
+        destinationHistoryService.addToHistory(destinationDetails)
+    }
+
 }

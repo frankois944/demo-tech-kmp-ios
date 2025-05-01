@@ -31,8 +31,13 @@ class HistoryCell: UICollectionViewCell {
         scrollView.frame = .init(origin: .zero, size: frame.size)
         self.addSubview(scrollView)
     }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 
-    func setupCell(destinations: [DestinationDetails], onSelectDestination: @escaping (DestinationDetails) -> Void) {
+    func setupCell(destinations: [DestinationDetails],
+                   onSelectDestination: @escaping (DestinationDetails) -> Void) {
         self.onSelectDestination = onSelectDestination
         // no usage of constraint, using the old way, the original!
         if items != destinations {
@@ -54,13 +59,11 @@ class HistoryCell: UICollectionViewCell {
         }
     }
 
+    // MARK: - Actions
+    
     @objc func onSelectDestinationTap(sender: UIButton) {
         let destination = items[sender.tag]
         onSelectDestination?(destination)
-    }
-
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
     }
 
 }

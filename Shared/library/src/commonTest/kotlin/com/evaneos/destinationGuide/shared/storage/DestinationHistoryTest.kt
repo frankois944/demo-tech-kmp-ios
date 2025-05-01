@@ -6,6 +6,7 @@ import com.evaneos.destinationGuide.shared.models.Destination
 import com.evaneos.destinationGuide.shared.models.DestinationDetails
 import com.evaneos.destinationGuide.shared.services.DestinationHistoryService
 import com.evaneos.destinationGuide.shared.services.DestinationHistoryServiceImpl
+import com.evaneos.destinationGuide.shared.services.destinationDetailsStub
 import com.evaneos.destinationGuide.shared.services.destinationsStub
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -43,15 +44,15 @@ class DestinationHistoryTest {
     fun testOrderInsertAndObservation() = runTest {
         historyService.current.test {
             // insert 3 destinations
-            historyService.addToHistory(destinationsStub.elementAt(4))
-            historyService.addToHistory(destinationsStub.elementAt(1))
-            historyService.addToHistory(destinationsStub.elementAt(6))
+            historyService.addToHistory(destinationDetailsStub.elementAt(4))
+            historyService.addToHistory(destinationDetailsStub.elementAt(1))
+            historyService.addToHistory(destinationDetailsStub.elementAt(6))
             // at first the history must be empty
             assertTrue(awaitItem().isEmpty(), "The history must be empty at first")
             // check if the LIFO insertion is respected
-            assertEquals(destinationsStub.elementAt(4).id, awaitItem().first().id)
-            assertEquals(destinationsStub.elementAt(1).id, awaitItem().first().id)
-            assertEquals(destinationsStub.elementAt(6).id, awaitItem().first().id)
+            assertEquals(destinationDetailsStub.elementAt(4).id, awaitItem().first().id)
+            assertEquals(destinationDetailsStub.elementAt(1).id, awaitItem().first().id)
+            assertEquals(destinationDetailsStub.elementAt(6).id, awaitItem().first().id)
         }
     }
 }

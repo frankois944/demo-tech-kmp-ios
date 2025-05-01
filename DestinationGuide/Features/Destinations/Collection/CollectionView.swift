@@ -11,7 +11,9 @@ import UIKit
 
 extension DestinationsViewController: UICollectionViewDataSource {
 
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+    func collectionView(_ collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        sizeForItemAt indexPath: IndexPath) -> CGSize {
         if indexPath.section == 0 {
             .init(width: view.frame.width, height: 40)
         } else {
@@ -31,9 +33,11 @@ extension DestinationsViewController: UICollectionViewDataSource {
         }
     }
 
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    func collectionView(_ collectionView: UICollectionView,
+                        cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if indexPath.section == 0 {
-            if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HistoryCell.identifier, for: indexPath) as? HistoryCell {
+            if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HistoryCell.identifier,
+                                                             for: indexPath) as? HistoryCell {
                 cell.setupCell(destinations: recentDestinations) { [weak self] in
                     self?.onSelectRecentDestination($0)
                 }
@@ -42,7 +46,8 @@ extension DestinationsViewController: UICollectionViewDataSource {
             return UICollectionViewCell()
         } else {
             let desti = destinations[indexPath.item]
-            if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: DestinationCell.identifier, for: indexPath) as? DestinationCell {
+            if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: DestinationCell.identifier,
+                                                             for: indexPath) as? DestinationCell {
                 cell.setupCell(destination: desti)
                 return cell
             }
@@ -50,7 +55,9 @@ extension DestinationsViewController: UICollectionViewDataSource {
         }
     }
 
-    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+    func collectionView(_ collectionView: UICollectionView,
+                        viewForSupplementaryElementOfKind kind: String,
+                        at indexPath: IndexPath) -> UICollectionReusableView {
         switch kind {
         case UICollectionView.elementKindSectionHeader:
             let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: SectionHeader.identifier, for: indexPath) as? SectionHeader
@@ -70,7 +77,8 @@ extension DestinationsViewController: UICollectionViewDataSource {
 
 extension DestinationsViewController: UICollectionViewDelegate {
 
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    func collectionView(_ collectionView: UICollectionView,
+                        didSelectItemAt indexPath: IndexPath) {
         guard indexPath.section == 1 else { return }
         let desti = destinations[indexPath.item]
         onSelectDestination(id: desti.id)
@@ -80,7 +88,9 @@ extension DestinationsViewController: UICollectionViewDelegate {
 // MARK: - UICollectionViewDelegateFlowLayout
 
 extension DestinationsViewController: UICollectionViewDelegateFlowLayout {
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+    func collectionView(_ collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        referenceSizeForHeaderInSection section: Int) -> CGSize {
         return SectionHeader.size(forWidth: collectionView.frame.width)
     }
 }

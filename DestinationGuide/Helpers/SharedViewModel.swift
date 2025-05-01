@@ -7,6 +7,7 @@
 
 import Shared
 
+/// Syncing the KMP viewmodel with the lifecycle of the ViewController
 class SharedViewModel<VM: ViewModel> {
 
     private let key = String(describing: type(of: VM.self))

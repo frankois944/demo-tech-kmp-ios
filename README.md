@@ -7,9 +7,13 @@ Quelques retours suite à la réalisation de ce test.
 
 J'ai réalisé la partie obligatoire en profitant pour utiliser Kotlin multiplatform.
 
+Requis :
+- Xcode 16.x
+- Java > 17 (configuré dans xcode)
+
 ## Partie 1
 - Le ViewModel a été réalisé en KMP (compatible iOS, Android, ...)
-    Les Tests unitaires sont dans le dossier *commonMain* de la librarie *Shared*
+    Les Tests unitaires sont dans le dossier *commonTest* de la librarie *Shared*
 - *DestinationFetchingService* (et ses modèles) ont été déplacés et convertis en Kotlin, tout en gardant leur particularité.
 - J'ai gardé pour la couche UIKit, tout en gardant son esprit, bien que tout devrait être à refaire (la migration en *constraints*)
     Il y a quelques découpages bienvenus du code pour le rendre plus digeste

@@ -4,6 +4,7 @@ package com.evaneos.destinationGuide.shared.services
 
 import com.evaneos.destinationGuide.shared.models.Destination
 import com.evaneos.destinationGuide.shared.models.DestinationDetails
+import com.evaneos.destinationGuide.shared.storage.DestinationHistoryItem
 import com.evaneos.destinationGuide.shared.storage.DestinationHistoryStorage
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -29,7 +30,7 @@ public interface DestinationHistoryService {
      *
      * @param destination
      */
-    public fun addToHistory(destination: Destination)
+    public fun addToHistory(destination: DestinationDetails)
 
     /**
      * Clear the history
@@ -47,16 +48,22 @@ public class DestinationHistoryServiceImpl : DestinationHistoryService {
 
     init {
         scope.launch {
-            storage.currentDestinationIds.collectLatest {
+            storage.destinations.collectLatest {
                 _current.value = it.mapNotNull {
-                    destinationDetailsStub.firstOrNull { destination -> destination.id == it }
+                    destinationDetailsStub.firstOrNull { destination -> destination.id == it.id }
                 }
             }
         }
     }
 
-    override fun addToHistory(destination: Destination) {
-        storage.addDestinationId(destination.id)
+    override fun addToHistory(destination: DestinationDetails) {
+        storage.add(
+            DestinationHistoryItem(
+                destination.id,
+                destination.name,
+                destination.url
+            )
+        )
     }
 
     override fun clear() {

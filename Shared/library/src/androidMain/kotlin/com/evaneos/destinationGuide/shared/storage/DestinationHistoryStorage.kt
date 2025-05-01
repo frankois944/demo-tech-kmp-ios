@@ -9,23 +9,23 @@ import kotlinx.coroutines.flow.asStateFlow
 
 internal actual class DestinationHistoryStorage {
 
-    private var _currentDestinationIds = MutableStateFlow<List<String>>(emptyList())
-    actual val currentDestinationIds: StateFlow<List<String>> = _currentDestinationIds.asStateFlow()
+    private var _destinations = MutableStateFlow<List<DestinationHistoryItem>>(emptyList())
+    actual val destinations: StateFlow<List<DestinationHistoryItem>> = _destinations.asStateFlow()
 
     //can be much better!
-    private val storedId: MutableList<String> = mutableListOf()
+    private val storedId: MutableList<DestinationHistoryItem> = mutableListOf()
 
     init {
-        _currentDestinationIds.value = storedId
+        _destinations.value = storedId
     }
 
-    actual fun addDestinationId(destinationId: String) {
-        storedId.add(0, destinationId)
-        _currentDestinationIds.value = storedId.toList()
+    actual fun add(destination: DestinationHistoryItem) {
+        storedId.add(0, destination)
+        _destinations.value = storedId.toList()
     }
 
     actual fun removeAll() {
         storedId.clear()
-        _currentDestinationIds.value = emptyList()
+        _destinations.value = emptyList()
     }
 }

@@ -10,19 +10,12 @@ import WebKit
 
 class DestinationDetailsController: UIViewController {
     
+    // MARK: - Properties
+    
     let name: String
     let webviewUrl: URL
     
-    init(title: String, webviewUrl: URL) {
-        self.name = title
-        self.webviewUrl = webviewUrl
-        
-        super.init(nibName: nil, bundle: nil)
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
+    // MARK: - Views
     
     let webView: WKWebView = {
         let webView = WKWebView()
@@ -38,6 +31,18 @@ class DestinationDetailsController: UIViewController {
         return spinner
     }()
     
+    // MARK: - Init
+    
+    init(title: String, webviewUrl: URL) {
+        self.name = title
+        self.webviewUrl = webviewUrl
+        
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()

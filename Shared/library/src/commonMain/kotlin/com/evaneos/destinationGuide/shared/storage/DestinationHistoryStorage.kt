@@ -9,9 +9,9 @@ internal expect class DestinationHistoryStorage() {
 
     // store the id of the destination
     // could be the whole model instead of the id
-    val currentDestinationIds: StateFlow<List<String>>
+    val destinations: StateFlow<List<DestinationHistoryItem>>
 
-    fun addDestinationId(destinationId: String)
+    fun add(destination: DestinationHistoryItem)
 
     fun removeAll()
 }

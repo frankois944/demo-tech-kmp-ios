@@ -5,33 +5,38 @@ package com.evaneos.destinationGuide.shared.storage
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.serialization.json.Json
 import platform.Foundation.NSUserDefaults
 
 internal actual class DestinationHistoryStorage {
 
-    private var _currentDestinationIds = MutableStateFlow<List<String>>(emptyList())
-    actual val currentDestinationIds: StateFlow<List<String>> = _currentDestinationIds.asStateFlow()
+    private var _destinations = MutableStateFlow<List<DestinationHistoryItem>>(emptyList())
+    actual val destinations: StateFlow<List<DestinationHistoryItem>> = _destinations.asStateFlow()
 
     //can be much better!
-    private val storedId: MutableList<String>
+    private val storedId: MutableList<DestinationHistoryItem>
         get() {
-            val list = NSUserDefaults.standardUserDefaults.arrayForKey("destinationIds") as? List<String>
-            return list?.toMutableList() ?: mutableListOf()
+            return NSUserDefaults.standardUserDefaults.stringForKey("destinationIds")?.let {
+                Json.decodeFromString<List<DestinationHistoryItem>>(it).toMutableList()
+            } ?: mutableListOf()
         }
 
     init {
-        _currentDestinationIds.value = storedId
+        _destinations.value = storedId
     }
 
-    actual fun addDestinationId(destinationId: String) {
+    actual fun add(destination: DestinationHistoryItem) {
         val ids = storedId
-        ids.add(0, destinationId)
-        NSUserDefaults.standardUserDefaults.setObject(ids, "destinationIds")
-        _currentDestinationIds.value = ids.toList()
+        ids.add(0, destination)
+        NSUserDefaults.standardUserDefaults.setObject(
+            Json.encodeToString(ids),
+            "destinationIds"
+        )
+        _destinations.value = ids.toList()
     }
 
     actual fun removeAll() {
         NSUserDefaults.standardUserDefaults.removeObjectForKey("destinationIds")
-        _currentDestinationIds.value = emptyList()
+        _destinations.value = emptyList()
     }
 }

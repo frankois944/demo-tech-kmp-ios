@@ -4,6 +4,7 @@ plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.skie)
+    alias(libs.plugins.kotlinSerialization)
 }
 
 kotlin {
@@ -29,18 +30,15 @@ kotlin {
     }
 
     sourceSets {
-        val commonMain by getting {
-            dependencies {
-                implementation(libs.kotlin.coroutines)
-                api(libs.androidx.lifecycle.viewmodel)
-            }
+        commonMain.dependencies {
+            implementation(libs.kotlin.coroutines)
+            implementation(libs.kotlin.serialization)
+            api(libs.androidx.lifecycle.viewmodel)
         }
-        val commonTest by getting {
-            dependencies {
-                implementation(libs.kotlin.test)
-                implementation(libs.kotlin.coroutines.test)
-                implementation(libs.turbine)
-            }
+        commonTest.dependencies {
+            implementation(libs.kotlin.test)
+            implementation(libs.kotlin.coroutines.test)
+            implementation(libs.turbine)
         }
     }
 }

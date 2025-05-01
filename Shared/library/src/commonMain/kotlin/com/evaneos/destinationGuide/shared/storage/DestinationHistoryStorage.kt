@@ -4,7 +4,7 @@ package com.evaneos.destinationGuide.shared.storage
 
 import kotlinx.coroutines.flow.StateFlow
 
-// only iOS is implemented, other target can also be added
+// both iOS android are implemented, other target can also be added
 internal expect class DestinationHistoryStorage() {
 
     // store the id of the destination

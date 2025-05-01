@@ -2,7 +2,6 @@
 
 package com.evaneos.destinationGuide.shared.services
 
-import com.evaneos.destinationGuide.shared.models.Destination
 import com.evaneos.destinationGuide.shared.models.DestinationDetails
 import com.evaneos.destinationGuide.shared.storage.DestinationHistoryItem
 import com.evaneos.destinationGuide.shared.storage.DestinationHistoryStorage
@@ -11,11 +10,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 
 public interface DestinationHistoryService {

@@ -1,18 +1,11 @@
 package com.evaneos.destinationGuide.shared.storage
 
 import app.cash.turbine.test
-import app.cash.turbine.turbineScope
-import com.evaneos.destinationGuide.shared.models.Destination
-import com.evaneos.destinationGuide.shared.models.DestinationDetails
 import com.evaneos.destinationGuide.shared.services.DestinationHistoryService
 import com.evaneos.destinationGuide.shared.services.DestinationHistoryServiceImpl
 import com.evaneos.destinationGuide.shared.services.destinationDetailsStub
-import com.evaneos.destinationGuide.shared.services.destinationsStub
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.launch
 import kotlinx.coroutines.test.StandardTestDispatcher
 import kotlinx.coroutines.test.resetMain
 import kotlinx.coroutines.test.runTest

@@ -22,7 +22,7 @@ J'ai réalisé la partie obligatoire en profitant pour utiliser Kotlin multiplat
 
 ## Les Règles
 - Limite les dépendances externes et justifie leur utilisation.
-    Pas de dépendance coté iOS, mais les indispensables sont du coté KMP
+    Pas de dépendance côté iOS, mais les indispensables sont du côté KMP
 - Essaie de faire des commits régulièrement (par exemple étape par étape).
     Désolé, je n'ai pas fait de commits réguliers. 
 - Le code de `DestinationFetchingService` ne devra pas avoir changé.

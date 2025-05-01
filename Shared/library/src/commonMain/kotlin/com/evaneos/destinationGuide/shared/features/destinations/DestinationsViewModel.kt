@@ -36,7 +36,7 @@ public class DestinationsViewModel(
         destinationHistoryService.current.stateIn(
             viewModelScope, SharingStarted.WhileSubscribed(5000), emptyList()
         )
-        
+
     init {
         loadDestinations()
     }
@@ -59,7 +59,7 @@ public class DestinationsViewModel(
             }
         }
     }
-    
+
     @Throws(Exception::class)
     public suspend fun onSelectDestination(destinationId: String): DestinationDetails {
         return withContext(Dispatchers.Default) {
@@ -81,7 +81,7 @@ public class DestinationsViewModel(
             }
         }
     }
-    
+
     public fun addDestinationDetailToHistory(destinationDetails: DestinationDetails) {
         destinationHistoryService.addToHistory(destinationDetails)
     }

@@ -1,3 +1,33 @@
+# Retours
+
+
+Bonjour,
+
+Quelques retours suite à la réalisation de ce test.
+
+J'ai réalisé la partie obligatoire en profitant pour utiliser Kotlin multiplatform.
+
+## Partie 1
+- Le ViewModel a été réalisé en KMP (compatible iOS, Android, ...)
+    Les Tests unitaires sont dans le dossier *commonMain* de la librarie *Shared*
+- *DestinationFetchingService* (et ses modèles) ont été déplacés et convertis en Kotlin, tout en gardant leur particularité.
+- J'ai gardé pour la couche UIKit, tout en gardant son esprit, bien que tout devrait être à refaire.
+    Il y a quelques découpages bienvenus du code pour le rendre plus digeste
+- Quelques commentaires dans le code ont été ajouté
+
+## Partie 2
+- J'ai utilisé *UserDefaults* dans la librairie KMP pour la persistance.
+- L'UI est synchronisé avec la mise à jour de l'historique
+- J'ai fait juste un petit test centré sur cette nouvelle feature, le test du viewModel est plus intéressant.
+
+## Les Règles
+- Limite les dépendances externes et justifie leur utilisation.
+    Pas de dépendance coté iOS, mais les indispensables sont du coté KMP
+- Essaie de faire des commits régulièrement (par exemple étape par étape).
+    Désolé, je n'ai pas fait de commits réguliers. 
+- Le code de `DestinationFetchingService` ne devra pas avoir changé.
+    J'ai converti la classe en Kotlin.
+
 ## Introduction
 ### Philosophie
 
